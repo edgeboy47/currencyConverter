@@ -2,14 +2,9 @@ import React from "react"
 
 function Form (props) {
     const state = props.state
-    const currencies = state.currencies
-        .sort((a, b) => a.name < b.name ? -1 : 1)
-        .filter(el => el.code !== "(none)")
-        .map(el => {
-            let code = el.code;
-            if(el.code.length !== 3) code = code.slice(0, 3) //Remove [G] at end of some codes
-            return <option key={code}>{el.name}</option>
-        });
+    const currencies = Object.keys(state.currencies)
+        .sort((a, b) => a < b ? -1 : 1)
+        .map(el =>  <option key={state.currencies[el]}>{el}</option> );
     
     return (
         <form>
